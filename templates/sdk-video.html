@@ -1,0 +1,617 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui, viewport-fit=cover"
+        name="viewport">
+    <style>
+        *,
+        *:active,
+        *:focus {
+            -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+        }
+
+        * {
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            user-select: none;
+        }
+
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-color: #000000;
+            font-family: "Helvetica Neue", Helvetica, STHeiTi, sans-serif;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        video {
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+            background-color: #000000;
+            object-fit: cover;
+        }
+
+        .title {
+            font-weight: bold;
+        }
+
+        .star {
+            color: #FFD700;
+            font-weight: bold;
+        }
+
+        #video_card {
+            position: absolute;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        #video_box {
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        #download_bar {
+            display: flex;
+            display: -webkit-flex;
+            flex-wrap: nowrap;
+            -webkit-flex-wrap: nowrap;
+            position: absolute;
+            justify-content: space-around;
+            -webkit-justify-content: space-around;
+            align-items: center;
+            -webkit-align-items: center;
+            bottom: 0;
+            background-color: rgba(255, 255, 255, 0.8);
+            color: #000000;
+            text-shadow: 1px 1px 1px #ffffff;
+        }
+
+        #download_bar.portrait {
+            width: 100vw;
+            height: 20vw;
+        }
+
+        #download_bar.landscape {
+            width: 100vh;
+            height: 20vh;
+        }
+
+        #download_bar.portrait #download_bar_icon {
+            width: 16vw;
+            height: 16vw;
+            border-radius: 4vw;
+            margin-left: 2vw;
+        }
+
+        #download_bar.landscape #download_bar_icon {
+            width: 16vh;
+            height: 16vh;
+            border-radius: 4vh;
+            margin-left: 2vh;
+        }
+
+        #download_bar ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        #download_bar.portrait ul {
+            font-size: 4vw;
+            margin-left: 2vw;
+        }
+
+        #download_bar.landscape ul {
+            font-size: 4vh;
+            margin-left: 2vh;
+        }
+
+        #space {
+            flex-grow: 1;
+            -webkit-flex-grow: 1;
+            flex-basis: auto;
+            -webkit-flex-basis: auto;
+        }
+
+        .download_button {
+            display: flex;
+            display: -webkit-flex;
+            justify-content: center;
+            -webkit-justify-content: center;
+            align-items: center;
+            -webkit-align-items: center;
+            background: #3385FF;
+            color: #FFFFFF;
+            text-shadow: 1px 1px 1px #000000;
+        }
+
+        #download_bar.portrait .download_button {
+            width: 25vw;
+            height: 10vw;
+            border-radius: 2vw;
+            font-size: 4vw;
+            margin-right: 2vw;
+        }
+
+        #download_bar.landscape .download_button {
+            width: 25vh;
+            height: 10vh;
+            border-radius: 2vh;
+            font-size: 4vh;
+            margin-right: 2vh;
+        }
+
+        #end_card {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            display: -webkit-flex;
+            justify-content: space-around;
+            -webkit-justify-content: space-around;
+            align-items: center;
+            -webkit-align-items: center;
+            background-image: url("{{ .Image1 }}");
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+        }
+
+        #html_end_card,
+        #native_end_card {
+            width: 100%;
+            height: auto;
+            padding: 10% 15% 10% 15%;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: #ffffff !important;
+            text-shadow: 1px 1px 1px #000000;
+        }
+
+        #native_end_card {
+            flex-direction: column;
+            -webkit-flex-direction: column;
+            justify-content: center;
+            -webkit-justify-content: center;
+            align-items: center;
+            -webkit-align-items: center;
+            text-align: center;
+        }
+
+        #end_card.portrait #native_end_card {
+            font-size: 5vw;
+        }
+
+        #end_card.landscape #native_end_card {
+            font-size: 5vh;
+        }
+
+        #end_card.portrait #end_card_icon {
+            width: 25vw;
+            height: 25vw;
+            border-radius: 5vw;
+        }
+
+        #end_card.landscape #end_card_icon {
+            width: 25vh;
+            height: 25vh;
+            border-radius: 5vh;
+        }
+
+        #end_card.portrait #native_end_card div {
+            margin-top: 2.5vw;
+        }
+
+        #end_card.landscape #native_end_card div {
+            margin-top: 2.5vh;
+        }
+
+        #end_card.portrait #description {
+            font-size: 4vw;
+        }
+
+        #end_card.landscape #description {
+            font-size: 4vh;
+        }
+
+        #end_card.portrait #native_end_card .download_button {
+            width: 25vw;
+            height: 10vw;
+            border-radius: 2vw;
+            font-size: 4vw;
+        }
+
+        #end_card.landscape #native_end_card .download_button {
+            width: 25vh;
+            height: 10vh;
+            border-radius: 2vh;
+            font-size: 4vh;
+        }
+
+        #muted_button,
+        #close_button {
+            display: flex;
+            display: -webkit-flex;
+            flex-wrap: nowrap;
+            -webkit-flex-wrap: nowrap;
+            position: fixed;
+            justify-content: center;
+            -webkit-justify-content: center;
+            align-items: center;
+            -webkit-align-items: center;
+            background-color: rgba(0, 0, 0, 0.4);
+            border-radius: 50%;
+            color: #FFFFFF;
+        }
+
+        #muted_button.portrait {
+            left: 5vw;
+            top: 5vw;
+            width: 8vw;
+            height: 8vw;
+            font-size: 5vw;
+        }
+
+        #muted_button.landscape {
+            left: 5vh;
+            top: 5vh;
+            width: 8vh;
+            height: 8vh;
+            font-size: 5vh;
+        }
+
+        #close_button.portrait {
+            right: 5vw;
+            top: 5vw;
+            width: 8vw;
+            height: 8vw;
+            font-size: 4vw;
+        }
+
+        #close_button.landscape {
+            right: 5vh;
+            top: 5vh;
+            width: 8vh;
+            height: 8vh;
+            font-size: 4vh;
+        }
+
+        #progress.portrait {
+            position: fixed;
+            width: 10vw;
+            height: 10vw;
+            right: 4vw;
+            top: 4vw;
+        }
+
+        #progress.landscape {
+            position: fixed;
+            width: 10vh;
+            height: 10vh;
+            right: 4vh;
+            top: 4vh;
+        }
+
+        #progress #seconds {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            display: -webkit-flex;
+            flex-wrap: nowrap;
+            -webkit-flex-wrap: nowrap;
+            justify-content: center;
+            -webkit-justify-content: center;
+            align-items: center;
+            -webkit-align-items: center;
+            line-height: 1.2em;
+            color: #FFFFFF;
+            background-color: rgba(0, 0, 0, 0.4);
+            border-radius: 50%;
+        }
+
+        #progress.portrait #seconds {
+            font-size: 4vw;
+        }
+
+        #progress.landscape #seconds {
+            font-size: 4vh;
+        }
+
+        #progress .wrapper {
+            width: 50%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            overflow: hidden;
+        }
+
+        #progress .right {
+            right: 0;
+        }
+
+        #progress .left {
+            left: 0;
+        }
+
+        #progress .circle {
+            border-radius: 50%;
+            position: absolute;
+            top: 0;
+            transform: rotate(-135deg);
+        }
+
+        #progress.portrait .circle {
+            width: 8vw;
+            height: 8vw;
+            border: 1vw solid #3385FF;
+        }
+
+        #progress.landscape .circle {
+            width: 8vh;
+            height: 8vh;
+            border: 1vh solid #3385FF;
+        }
+
+        #progress.portrait .right_circle {
+            border-top: 1vw solid transparent;
+            border-right: 1vw solid transparent;
+            right: 0;
+        }
+
+        #progress.landscape .right_circle {
+            border-top: 1vh solid transparent;
+            border-right: 1vh solid transparent;
+            right: 0;
+        }
+
+        #progress.portrait .left_circle {
+            border-bottom: 1vw solid transparent;
+            border-left: 1vw solid transparent;
+            left: 0;
+        }
+
+        #progress.landscape .left_circle {
+            border-bottom: 1vh solid transparent;
+            border-left: 1vh solid transparent;
+            left: 0;
+        }
+
+        @-webkit-keyframes circle_right {
+            0% {
+                -webkit-transform: rotate(-135deg);
+            }
+
+            50%,
+            100% {
+                -webkit-transform: rotate(45deg);
+            }
+        }
+
+        @-webkit-keyframes circle_left {
+
+            0%,
+            50% {
+                -webkit-transform: rotate(-135deg);
+            }
+
+            100% {
+                -webkit-transform: rotate(45deg);
+            }
+        }
+
+        .portrait svg {
+            fill: #ffffff;
+            width: 8vw;
+            height: 8vw;
+        }
+
+        .landscape svg {
+            fill: #ffffff;
+            width: 8vh;
+            height: 8vh;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="video_card">
+        <div id="video_box">
+            <video autoplay muted webkit-muted poster="{{ .Image1 }}" x5-playsinline playsinline webkit-playsinline
+                src="{{ .VideoURL }}" />
+        </div>
+        <a class="download_url" href="{{ .TargetURL }}">
+            <div id="download_bar">
+                <img id="download_bar_icon" src="{{ .IconURL }}" />
+                <ul class="title_bar">
+                    <li class="title">{{ .Title }}</li>
+                    <li class="star">★ ★ ★ ★ ★</li>
+                </ul>
+                <div id="space"></div>
+                <div class="download_button">立即下载</div>
+            </div>
+        </a>
+        <div id="progress">
+            <div id="seconds"></div>
+            <div class="wrapper right">
+                <div class="circle right_circle" id="right_circle"></div>
+            </div>
+            <div class="wrapper left">
+                <div class="circle left_circle" id="left_circle"></div>
+            </div>
+        </div>
+        <div id="muted_button">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" id="volume_off">
+                <path
+                    d="M15 8.59l-2.12-2.13-1.42 1.42L13.6 10l-2.13 2.12 1.42 1.42L15 11.4l2.12 2.13 1.42-1.42L16.4 10l2.13-2.12-1.42-1.42L15 8.6zM4 7H0v6h4l5 5V2L4 7z" />
+            </svg>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" id="volume_30" style="display: none">
+                <path d="M9 7H5v6h4l5 5V2L9 7z" /></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" id="volume_60" style="display: none">
+                <path
+                    d="M7 7H3v6h4l5 5V2L7 7zm8.54 6.54l-1.42-1.42a3 3 0 0 0 0-4.24l1.42-1.42a4.98 4.98 0 0 1 0 7.08z" />
+            </svg>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" id="volume_100" style="display: none">
+                <path
+                    d="M5 7H1v6h4l5 5V2L5 7zm11.36 9.36l-1.41-1.41a6.98 6.98 0 0 0 0-9.9l1.41-1.41a8.97 8.97 0 0 1 0 12.72zm-2.82-2.82l-1.42-1.42a3 3 0 0 0 0-4.24l1.42-1.42a4.98 4.98 0 0 1 0 7.08z" />
+            </svg>
+        </div>
+    </div>
+    <div id="end_card" style="display:none">
+        <div id="html_end_card" style="display:none">
+            {{ .HTMLSnippet }}
+        </div>
+        <div id="native_end_card" style="display:none">
+            <img id="end_card_icon" src="{{ .IconURL }}" />
+            <div class="title_bar">
+                <div class="title">{{ .Title }}</div>
+                <div class="star">★ ★ ★ ★ ★</div>
+            </div>
+            <div id="description">{{ .Description }}</div>
+            <a class="download_url" href="{{ .TargetURL }}">
+                <div class="download_button">立即下载</div>
+            </a>
+        </div>
+        <div id="close_button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                <path
+                    d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm1.41-1.41A8 8 0 1 0 15.66 4.34 8 8 0 0 0 4.34 15.66zm9.9-8.49L11.41 10l2.83 2.83-1.41 1.41L10 11.41l-2.83 2.83-1.41-1.41L8.59 10 5.76 7.17l1.41-1.41L10 8.59l2.83-2.83 1.41 1.41z" />
+        </svg></div>
+    </div>
+    <script type="text/javascript">
+        (function () {
+            var video = document.getElementsByTagName('video')[0];
+            var video_card = document.getElementById('video_card');
+            var download_bar = document.getElementById('download_bar');
+            var end_card = document.getElementById('end_card');
+            var html_end_card = document.getElementById('html_end_card');
+            var native_end_card = document.getElementById('native_end_card');
+            var right_circle = document.getElementById('right_circle');
+            var left_circle = document.getElementById('left_circle');
+            var progress = document.getElementById('progress');
+            var seconds = document.getElementById('seconds');
+            var volume_off = document.getElementById('volume_off');
+            var volume_30 = document.getElementById('volume_30');
+            var volume_60 = document.getElementById('volume_60');
+            var volume_100 = document.getElementById('volume_100');
+            var volume = volume_off;
+            var muted_button = document.getElementById('muted_button');
+            var close_button = document.getElementById('close_button');
+            var download_bar_icon = document.getElementById('download_bar_icon');
+            var end_card_icon = document.getElementById('end_card_icon');
+
+            function resize() {
+                var width = document.body.clientWidth;
+                var height = document.body.clientHeight;
+                if (width < height) {
+                    progress.className = 'portrait';
+                    muted_button.className = 'portrait';
+                    close_button.className = 'portrait';
+                    download_bar.className = 'portrait';
+                    end_card.className = 'portrait';
+                    download_bar.style.left = 0;
+                } else {
+                    progress.className = 'landscape';
+                    muted_button.className = 'landscape';
+                    close_button.className = 'landscape';
+                    download_bar.className = 'landscape';
+                    end_card.className = 'landscape';
+                    download_bar.style.left = (((width - height) / 2) * 100 / width) + 'vw';
+                }
+            }
+
+            resize();
+            window.addEventListener('onorientationchange' in window ? 'orientationchange' : 'resize', function() {
+                setTimeout(resize, 100);
+            }, false);
+
+            var title = "{{ .Title }}".trim();
+            if (title == "") {
+                var title_bars = document.getElementsByClassName('title_bar');
+                for (var i = 0; i < title_bars.length; i++) {
+                    title_bars[i].style.display = "none";
+                }
+            }
+            var icon_url = "{{ .IconURL }}".trim();
+            if (icon_url == "") {
+                download_bar_icon.style.display = "none";
+                end_card_icon.style.display = "none";
+            }
+            if (html_end_card.innerHTML.trim() != "" && icon_url == "" && title == "") {
+                download_bar.style.display = "none";
+            }
+            var download_urls = document.getElementsByClassName('download_url');
+            var download_buttons = document.getElementsByClassName('download_button');
+            video.addEventListener('ended', function () {
+                video_card.style.display = "none";
+                video_card.innerHTML = "";
+                if (html_end_card.innerHTML.trim() == "") {
+                    html_end_card.style.display = "none";
+                    native_end_card.style.display = "flex";
+                    native_end_card.style.display = "-webkit-flex";
+                } else {
+                    html_end_card.style.display = "block";
+                    native_end_card.style.display = "none";
+                }
+                end_card.style.display = "flex";
+                end_card.style.display = "-webkit-flex";
+            });
+            video.addEventListener('timeupdate', function () {
+                seconds.innerHTML = Math.floor(video.duration - video.currentTime) + 1;
+                var percent = (video.currentTime / video.duration) * 100;
+                if (percent <= 50) {
+                    right_circle.style.cssText = '-webkit-transform: rotate(' + (-135 + percent * 3.6) + 'deg)';
+                    left_circle.style.cssText = '-webkit-transform: rotate(-135deg)';
+                } else {
+                    right_circle.style.cssText = '-webkit-transform: rotate(45deg)';
+                    left_circle.style.cssText = '-webkit-transform: rotate(' + (-135 + (percent - 50) * 3.6) +
+                        'deg)';
+                }
+            });
+            video.addEventListener('loadedmetadata', function() {
+                progress.removeEventListener('click', close);
+            });
+
+            function volumechange() {
+                volume.style.display = "none";
+                if (video.muted) {
+                    volume = volume_off;
+                } else if (video.volume <= 0.3) {
+                    volume = volume_30;
+                } else if (video.volume <= 0.6) {
+                    volume = volume_60;
+                } else {
+                    volume = volume_100;
+                }
+                volume.style.display = "block";
+            }
+            video.addEventListener('volumechange', volumechange);
+            muted_button.addEventListener('click', function () {
+                video.muted = !video.muted;
+                volumechange();
+            });
+            function close() {
+                try {
+                    adtalos.dispatch('close', '');
+                }
+                catch(e) {
+                    window.close();
+                }
+            }
+            close_button.addEventListener('click', close);
+            progress.addEventListener('click', close);
+        })();
+    </script>
+</body>
+
+</html>
