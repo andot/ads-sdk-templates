@@ -578,10 +578,6 @@
                         'deg)';
                 }
             });
-            video.addEventListener('loadedmetadata', function() {
-                progress.removeEventListener('click', close);
-            });
-
             function volumechange() {
                 volume.style.display = "none";
                 if (video.muted) {
