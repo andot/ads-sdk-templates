@@ -1,0 +1,243 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <style>
+        *,
+        *:active,
+        *:focus {
+            -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+        }
+
+        * {
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            user-select: none;
+        }
+
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: transparent;
+            font-family: "Helvetica Neue", Helvetica, STHeiTi, sans-serif;
+        }
+
+        #content {
+            position: relative;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        #banner_bar {
+            display: flex;
+            display: -webkit-flex;
+            flex-wrap: nowrap;
+            -webkit-flex-wrap: nowrap;
+            justify-content: space-between;
+            -webkit-justify-content: space-between;
+            align-items: center;
+            -webkit-align-items: center;
+            width: 96vw;
+            min-height: 15.625vw;
+            padding-left: 2vw;
+            padding-right: 2vw;
+            margin: 0;
+            background-color: #eeeeee;
+        }
+
+        #icon {
+            width: 12vw;
+            height: 12vw;
+            border-radius: 3vw;
+            padding: 0;
+            margin-right: 2vw;
+            border: 0;
+            flex-shrink: 0;
+            -webkit-flex-shrink: 0;
+        }
+
+        #title_bar {
+            display: flex;
+            display: -webkit-flex;
+            flex-direction: column;
+            -webkit-flex-direction: column;
+            justify-content: space-around;
+            -webkit-justify-content: space-around;
+            height: 100%;
+            text-shadow:1px 1px 1px #ffffff;
+        }
+
+        #title {
+            display: flex;
+            display: -webkit-flex;
+            align-items: center;
+            -webkit-align-items: center;
+            font-weight: bold;
+            font-size: 4vw;
+            color: #333333;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        #subtitle,
+        #description {
+            display: flex;
+            display: -webkit-flex;
+            align-items: center;
+            -webkit-align-items: center;
+            font-size: 3vw;
+            color: #666666;
+        }
+
+        #space {
+            flex-grow: 1;
+            -webkit-flex-grow: 1;
+            flex-basis: auto;
+            -webkit-flex-basis: auto;
+        }
+
+        #button {
+            display: flex;
+            display: -webkit-flex;
+            justify-content: center;
+            -webkit-justify-content: center;
+            align-items: center;
+            -webkit-align-items: center;
+            width: 24vw;
+            height: 10vw;
+            margin-left: 2vw;
+            background: #3385FF;
+            border-radius: 2vw;
+            color: #FFFFFF;
+            font-size: 4vw;
+            text-shadow:1px 1px 1px #000000;
+        }
+
+        #images_bar {
+            display: flex;
+            display: -webkit-flex;
+            justify-content: space-around;
+            -webkit-justify-content: space-around;
+            align-items: center;
+            -webkit-align-items: center;
+            width: 100vw;
+            min-height: 15.625vw;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="content">
+        <a href="{{ .TargetURL }}">
+            <div id="banner_bar">
+                <img src="{{ .IconURL }}" id="icon" />
+                <div id="title_bar">
+                    <div id="title" title="{{ .Title }}">{{ .Title }}</div>
+                    <div id="subtitle" title="{{ .Subtitle }}">{{ .Subtitle }}</div>
+                    <div id="description" title="{{ .Description }}">{{ .Description }}</div>
+                </div>
+                <div id="space"></div>
+                <div id="button">{{ .ButtonText }}</div>
+            </div>
+            <div id="images_bar">
+                <img src="{{ .Image1 }}" id="image1" />
+                <img src="{{ .Image2 }}" id="image2" />
+                <img src="{{ .Image3 }}" id="image3" />
+            </div>
+        </a>
+    </div>
+    <script type="text/javascript">
+        (function () {
+            var banner_bar = document.getElementById('banner_bar');
+            var icon = document.getElementById('icon');
+            var title_bar = document.getElementById('title_bar');
+            var title = document.getElementById('title');
+            var subtitle = document.getElementById('subtitle');
+            var description = document.getElementById('description');
+            var button = document.getElementById('button');
+            var images_bar = document.getElementById('images_bar');
+            var image1 = document.getElementById('image1');
+            var image2 = document.getElementById('image2');
+            var image3 = document.getElementById('image3');
+
+            var icon_src = '{{ .IconURL }}'.trim();
+            var video_src = '{{ .VideoURL }}'.trim();
+            var image1_src = '{{ .Image1 }}'.trim();
+            var image2_src = '{{ .Image2 }}'.trim();
+            var image3_src = '{{ .Image3 }}'.trim();
+
+            if (title.innerHTML.trim() == '') {
+                banner_bar.style.display = 'none';
+            } else {
+                images_bar.style.display = 'none';
+            }
+
+            if (icon_src == '') {
+                if (image1_src == '') {
+                    icon.style.display = 'none';
+                } else {
+                    icon.src = image1_src;
+                }
+            }
+
+            if (title.innerHTML.trim() == '') {
+                title.style.display = 'none';
+            }
+
+            if (subtitle.innerHTML.trim() == '') {
+                subtitle.style.display = 'none';
+            }
+
+            if (description.innerHTML.trim() == '') {
+                description.style.display = 'none';
+            }
+
+            if (subtitle.innerHTML.trim() != '' && description.innerHTML.trim() != '') {
+                subtitle.style.display = 'none';
+            }
+
+            if (title.innerHTML.trim() == '' && subtitle.innerHTML.trim() == '' && description.innerHTML.trim() ==
+                '') {
+                title_bar.style.display = 'none';
+            }
+
+            if (button.innerHTML.trim() == '') {
+                button.style.display = 'none';
+            }
+
+            if (image1_src == '') {
+                image1.style.display = 'none';
+                image2.style.display = 'none';
+                image3.style.display = 'none';
+                images_bar.style.display = 'none';
+            } else if (image2_src == '') {
+                image1.style.width = '100vw';
+                image1.style.height = '15.625vw';                
+                image2.style.display = 'none';
+                image3.style.display = 'none';
+            } else if (image3_src == '') {
+                image1.style.width = '50vw';
+                image1.style.height = '15.625vw';                
+                image2.style.width = '50vw';
+                image2.style.height = '15.625vw';                
+                image3.style.display = 'none';
+            } else {
+                image1.style.width = '33vw';
+                image1.style.height = '15.625vw';                
+                image2.style.width = '33vw';
+                image2.style.height = '15.625vw';                
+                image3.style.width = '33vw';
+                image3.style.height = '15.625vw';                
+            }
+        })();
+    </script>
+</body>
+
+</html>
