@@ -510,6 +510,14 @@
             var download_bar_icon = document.getElementById('download_bar_icon');
             var end_card_icon = document.getElementById('end_card_icon');
 
+            video.muted = !video.muted;
+            var mutedstatus1 = video.muted;
+            video.muted = !video.muted;
+            var mutedstatus2 = video.muted;
+            if (mutedstatus1 == mutedstatus2) {
+                muted_button.style.display = "none";
+            }
+            
             function resize() {
                 var width = document.body.clientWidth;
                 var height = document.body.clientHeight;
