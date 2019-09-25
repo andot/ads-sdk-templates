@@ -34,8 +34,19 @@
             font-family: "Helvetica Neue", Helvetica, STHeiTi, sans-serif;
         }
 
+        div#content {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            font-size: 0;
+        }
+        
         a {
             text-decoration: none;
+        }
+        
+        video {
+            object-fit: cover;
         }
 
         img, video {
@@ -44,7 +55,6 @@
             padding: 0;
             margin: 0;
             background-color: #000000;
-            object-fit: cover;
             outline-width: 0px;
             vertical-align: top;
         }
@@ -52,8 +62,10 @@
 </head>
 
 <body>
-    <a href="{{ .TargetURL }}">{{ if .VideoURL }}<video autoplay poster="{{ .Image1 }}" x5-playsinline playsinline webkit-playsinline
+    <div id="content">
+        <a href="{{ .TargetURL }}">{{ if .VideoURL }}<video autoplay poster="{{ .Image1 }}" x5-playsinline playsinline webkit-playsinline
         src="{{ .VideoURL }}" />{{ else }}<img src="{{ .Image1 }}" />{{end}}</a>
+    </div>
 </body>
 
 </html>
