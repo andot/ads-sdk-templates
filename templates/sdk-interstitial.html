@@ -38,36 +38,22 @@
             text-decoration: none;
         }
 
-        .portrait img {
-            width: 100vw;
-            height: auto;
-        }
-
-        .landscape img {
-            width: auto;
-            height: 100vh;
+        img, video {
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+            background-color: #000000;
+            object-fit: cover;
+            outline-width: 0px;
+            vertical-align: top;
         }
     </style>
 </head>
 
 <body>
-    <a href="{{ .TargetURL }}"><img src="{{ .Image1 }}" id="image" /></a>
-    <script type="text/javascript">
-        function resize() {
-            var width = document.body.clientWidth;
-            var height = document.body.clientHeight;
-            var image = document.getElementById('image');
-            var imgWidth = image.naturalWidth;
-            var imgHeight = image.naturalHeight;
-            if (imgWidth / imgHeight <= width / height) {
-                document.body.className = 'portrait';
-            } else {
-                document.body.className = 'landscape';
-            }
-        }
-        resize();
-        window.addEventListener('resize', resize);
-    </script>
+    <a href="{{ .TargetURL }}">{{ if .VideoURL }}<video autoplay poster="{{ .Image1 }}" x5-playsinline playsinline webkit-playsinline
+        src="{{ .VideoURL }}" />{{ else }}<img src="{{ .Image1 }}" />{{end}}</a>
 </body>
 
 </html>
