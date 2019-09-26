@@ -536,9 +536,9 @@
                     end_card.className = 'landscape';
                     download_bar.style.left = (((width - height) / 2) * 100 / width) + 'vw';
                 }
+                video.play();
             }
 
-            resize();
             setTimeout(resize, 100);
 
             window.addEventListener('onorientationchange' in window ? 'orientationchange' : 'resize', function() {
