@@ -48,7 +48,7 @@
             text-decoration: none;
         }
 
-        img {
+        img, video {
             width: auto;
             height: auto;
             max-width: 80vw;
@@ -59,7 +59,8 @@
 
 <body>
     <div id="content">
-        <a href="{{ .TargetURL }}"><img src="{{ .Image1 }}" /></a>
+        <a href="{{ .TargetURL }}">{{ if .VideoURL }}<video autoplay poster="{{ .Image1 }}" x5-playsinline playsinline webkit-playsinline
+            src="{{ .VideoURL }}" />{{ else }}<img src="{{ .Image1 }}" />{{end}}</a>
     </div>
 </body>
 
