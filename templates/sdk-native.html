@@ -202,8 +202,8 @@
     </div>
     <script type="text/javascript">
         (function () {
-            var webViewWidth = adtalos.getWidth();
-            var webViewHeight = adtalos.getHeight();
+            var webViewWidth = document.body.clientWidth;
+            var webViewHeight = document.body.clientHeight;
             var top_bar = document.getElementById('top_bar');
             var icon = document.getElementById('icon');
             var title_bar = document.getElementById('title_bar');
@@ -281,7 +281,7 @@
                 imageHeight -= webViewWidth * 0.06;
             }
 
-            if (imageHeight > 1) {
+            if (imageHeight > 50) {
                 imageHeight += 'px';
                 images_box.style.height = imageHeight;
                 image1.style.height = imageHeight;
