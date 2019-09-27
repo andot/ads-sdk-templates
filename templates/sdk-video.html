@@ -245,7 +245,7 @@
             display: -webkit-flex;
             flex-wrap: nowrap;
             -webkit-flex-wrap: nowrap;
-            position: fixed;
+            position: absolute;
             justify-content: center;
             -webkit-justify-content: center;
             align-items: center;
@@ -253,6 +253,7 @@
             background-color: rgba(0, 0, 0, 0.4);
             border-radius: 50%;
             color: #FFFFFF;
+            cursor: pointer;
         }
 
         #muted_button.portrait {
@@ -287,8 +288,12 @@
             font-size: 4vh;
         }
 
+        #progress {
+            position: absolute;
+            cursor: pointer;
+        }
+
         #progress.portrait {
-            position: fixed;
             width: 10vw;
             height: 10vw;
             right: 4vw;
@@ -296,7 +301,6 @@
         }
 
         #progress.landscape {
-            position: fixed;
             width: 10vh;
             height: 10vh;
             right: 4vh;
@@ -538,9 +542,12 @@
                 }
             }
 
-            setTimeout(resize, 100);
+            resize();
 
-            window.addEventListener('onorientationchange' in window ? 'orientationchange' : 'resize', resize);
+            window.addEventListener('resize', resize);
+            window.addEventListener('orientationchange', function() {
+                setTimeout(resize, 200);
+            });
 
             var title = "{{ .Title }}".trim();
             if (title == "") {
