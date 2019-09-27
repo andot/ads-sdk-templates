@@ -540,9 +540,7 @@
 
             setTimeout(resize, 100);
 
-            window.addEventListener('onorientationchange' in window ? 'orientationchange' : 'resize', function() {
-                setTimeout(resize, 100);
-            }, false);
+            window.addEventListener('onorientationchange' in window ? 'orientationchange' : 'resize', resize);
 
             var title = "{{ .Title }}".trim();
             if (title == "") {
