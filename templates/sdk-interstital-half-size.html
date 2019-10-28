@@ -54,6 +54,50 @@
             max-width: 80vw;
             max-height: 80vh;
         }
+
+        #close_button {
+            display: none;
+            flex-wrap: nowrap;
+            -webkit-flex-wrap: nowrap;
+            position: absolute;
+            justify-content: center;
+            -webkit-justify-content: center;
+            align-items: center;
+            -webkit-align-items: center;
+            background-color: #3385FF;
+            border-radius: 50%;
+            color: #FFFFFF;
+            cursor: pointer;
+            z-index: 2147483647;
+        }
+
+        #close_button.portrait {
+            right: -4vw;
+            top: -4vw;
+            width: 8vw;
+            height: 8vw;
+            font-size: 4vw;
+        }
+
+        #close_button.landscape {
+            right: -4vh;
+            top: -4vh;
+            width: 8vh;
+            height: 8vh;
+            font-size: 4vh;
+        }
+
+        .portrait svg {
+            fill: #ffffff;
+            width: 8vw;
+            height: 8vw;
+        }
+
+        .landscape svg {
+            fill: #ffffff;
+            width: 8vh;
+            height: 8vh;
+        }
     </style>
 </head>
 
@@ -61,7 +105,61 @@
     <div id="content">
         <a href="{{ .TargetURL }}">{{ if .VideoURL }}<video autoplay poster="{{ .Image1 }}" x5-playsinline playsinline webkit-playsinline
             src="{{ .VideoURL }}" />{{ else }}<img src="{{ .Image1 }}" />{{end}}</a>
+        <div id="close_button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+            <path
+                d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm1.41-1.41A8 8 0 1 0 15.66 4.34 8 8 0 0 0 4.34 15.66zm9.9-8.49L11.41 10l2.83 2.83-1.41 1.41L10 11.41l-2.83 2.83-1.41-1.41L8.59 10 5.76 7.17l1.41-1.41L10 8.59l2.83-2.83 1.41 1.41z" />
+        </svg></div>
     </div>
+
+    <script type="text/javascript">
+        (function () {
+            var close_button = document.getElementById('close_button');
+            
+            function resize() {
+                var width = document.body.clientWidth;
+                var height = document.body.clientHeight;
+                if (width < height) {
+                    close_button.className = 'portrait';
+                } else {
+                    close_button.className = 'landscape';
+                }
+            }
+
+            resize();
+
+            window.addEventListener('resize', resize);
+            window.addEventListener('orientationchange', function() {
+                setTimeout(resize, 200);
+            });
+
+            function close() {
+                try {
+                    adtalos.dispatch('close', '');
+                }
+                catch(e) {
+                    window.close();
+                }
+            }
+            close_button.addEventListener('click', close);
+
+            var opacity = 0;
+            setTimeout(function() {
+                    close_button.style.opacity = opacity;
+                    close_button.style.webkitOpacity = opacity;
+                    close_button.style.display = "flex";
+                    close_button.style.display = "-webkit-flex";
+                    var timer = setInterval(function() {
+                        if (opacity >= 1) {
+                            clearInterval(timer);
+                        }
+                        opacity += 0.1;
+                        close_button.style.opacity = opacity;
+                        close_button.style.webkitOpacity = opacity;
+                    }, 100);
+            }, 1000);
+        })();
+    </script>
+
 </body>
 
 </html>
