@@ -282,7 +282,7 @@
             }
 
             if (imageHeight > 50) {
-                imageHeight += 'px';
+                imageHeight = ((imageHeight / webViewWidth) * 100) + 'vw';
                 images_box.style.height = imageHeight;
                 image1.style.height = imageHeight;
                 image2.style.height = imageHeight;
@@ -294,9 +294,7 @@
                 image1.style.display = 'none';
                 image2.style.display = 'none';
                 image3.style.display = 'none';
-                if (imageHeight > 1) {
-                    images_box.style.display = 'none';
-                }
+                images_box.style.display = 'none';
             } else if (image2_src == '') {
                 image1.style.width = '100vw';
                 image2.style.display = 'none';
