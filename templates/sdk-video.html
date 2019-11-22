@@ -113,12 +113,12 @@
         }
 
         #download_bar.portrait ul {
-            font-size: 4vw;
+            font-size: 3.5vw;
             margin-left: 2vw;
         }
 
         #download_bar.landscape ul {
-            font-size: 4vh;
+            font-size: 3.5vh;
             margin-left: 2vh;
         }
 
@@ -145,7 +145,7 @@
             width: 25vw;
             height: 10vw;
             border-radius: 2vw;
-            font-size: 4vw;
+            font-size: 3.5vw;
             margin-right: 2vw;
         }
 
@@ -153,7 +153,7 @@
             width: 25vh;
             height: 10vh;
             border-radius: 2vh;
-            font-size: 4vh;
+            font-size: 3.5vh;
             margin-right: 2vh;
         }
 
@@ -261,32 +261,32 @@
         }
 
         #muted_button.portrait {
-            left: 5vw;
-            top: 5vw;
+            left: 6vw;
+            top: 10vw;
             width: 8vw;
             height: 8vw;
             font-size: 5vw;
         }
 
         #muted_button.landscape {
-            left: 5vh;
-            top: 5vh;
+            left: 6vh;
+            top: 6vh;
             width: 8vh;
             height: 8vh;
             font-size: 5vh;
         }
 
         #close_button.portrait {
-            right: 5vw;
-            top: 5vw;
+            right: 6vw;
+            top: 10vw;
             width: 8vw;
             height: 8vw;
             font-size: 4vw;
         }
 
         #close_button.landscape {
-            right: 5vh;
-            top: 5vh;
+            right: 6vh;
+            top: 6vh;
             width: 8vh;
             height: 8vh;
             font-size: 4vh;
@@ -300,15 +300,15 @@
         #progress.portrait {
             width: 10vw;
             height: 10vw;
-            right: 4vw;
-            top: 4vw;
+            right: 5vw;
+            top: 9vw;
         }
 
         #progress.landscape {
             width: 10vh;
             height: 10vh;
-            right: 4vh;
-            top: 4vh;
+            right: 5vh;
+            top: 5vh;
         }
 
         #progress #seconds {
@@ -546,8 +546,7 @@
                 }
             }
 
-            resize();
-
+            setTimeout(resize, 200);
             window.addEventListener('resize', resize);
             window.addEventListener('orientationchange', function() {
                 setTimeout(resize, 200);
@@ -568,8 +567,7 @@
             if (html_end_card.innerHTML.trim() != "" && icon_url == "" && title == "") {
                 download_bar.style.display = "none";
             }
-            var download_urls = document.getElementsByClassName('download_url');
-            var download_buttons = document.getElementsByClassName('download_button');
+
             video.addEventListener('ended', function () {
                 video_card.style.display = "none";
                 video_card.innerHTML = "";
