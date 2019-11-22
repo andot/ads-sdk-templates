@@ -22,6 +22,7 @@
         body {
             margin: 0;
             padding: 0;
+            width: 100%;
             height: 100%;
             display: flex;
             display: -webkit-flex;
@@ -126,8 +127,7 @@
                 }
             }
 
-            resize();
-
+            setTimeout(resize, 200);
             window.addEventListener('resize', resize);
             window.addEventListener('orientationchange', function() {
                 setTimeout(resize, 200);
