@@ -57,6 +57,176 @@
             max-height: 80vh;
         }
 
+        #title {
+            font-weight: bold;
+        }
+
+        #star {
+            color: #FFD700;
+            font-weight: bold;
+        }
+
+        #native_content {
+            background-color: rgba(0, 0, 0, 0.7);
+            color: #ffffff;
+            text-shadow: 1px 1px 1px #000000;
+            flex-direction: column;
+            -webkit-flex-direction: column;
+            justify-content: center;
+            -webkit-justify-content: center;
+            align-items: center;
+            -webkit-align-items: center;
+            text-align: center;
+        }
+
+        #native_content.portrait {
+            width: 80vw;
+            height: auto;
+        }
+
+        #native_content.landscape {
+            width: auto;
+            height: 80vh;
+        }
+
+        #download_bar {
+            display: flex;
+            display: -webkit-flex;
+            flex-wrap: nowrap;
+            -webkit-flex-wrap: nowrap;
+            justify-content: left;
+            -webkit-justify-content: left;
+            align-items: center;
+            -webkit-align-items: center;
+            background-color: rgba(255, 255, 255, 0.8);
+            color: #000000;
+            text-shadow: 1px 1px 1px #ffffff;
+        }
+
+        .portrait #download_bar {
+            width: 80vw;
+            height: 16vw;
+        }
+
+        .landscape #download_bar {
+            width: auto;
+            height: 16vh;
+        }
+
+        .portrait #download_bar #icon {
+            width: 12vw;
+            height: 12vw;
+            border-radius: 3vw;
+            margin-left: 2vw;
+        }
+
+        .landscape #download_bar #icon {
+            width: 12vh;
+            height: 12vh;
+            border-radius: 3vh;
+            margin-left: 2vh;
+        }
+
+        #download_bar ul {
+            list-style-type: none;
+            padding: 0;
+            text-align: left;
+        }
+
+        .portrait #download_bar ul {
+            font-size: 3.5vw;
+            margin-left: 4vw;
+            margin-right: 4vw;
+        }
+
+        .landscape #download_bar ul {
+            font-size: 3.5vh;
+            margin-left: 4vh;
+            margin-right: 4vh;
+        }
+
+        .portrait #image_box {
+            width: 80vw;
+            height: auto;
+        }
+
+        .landscape #image_box {
+            width: auto;
+            height: 64vh;
+        }
+
+        .portrait #image_box.image1 #image1 {
+            width: 80vw;
+            height: auto;
+        }
+
+        .landscape #image_box.image1 #image1 {
+            width: auto;
+            height: 64vh;
+        }
+
+        #image_box.image1 #image2 {
+            display: none;
+        }
+
+        #image_box.image1 #image3 {
+            display: none;
+        }
+
+        .portrait #image_box.image2 #image1 {
+            width: 40vw;
+            height: auto;
+        }
+
+        .landscape #image_box.image2 #image1 {
+            width: auto;
+            height: 64vh;
+        }
+
+        .portrait #image_box.image2 #image2 {
+            width: 40vw;
+            height: auto;
+        }
+
+        .landscape #image_box.image2 #image2 {
+            width: auto;
+            height: 64vh;
+        }
+
+        #image_box.image2 #image3 {
+            display: none;
+        }
+
+        .portrait #image_box.image3 #image1 {
+            width: 26.667vw;
+            height: auto;
+        }
+
+        .landscape #image_box.image3 #image1 {
+            width: auto;
+            height: 64vh;
+        }
+
+        .portrait #image_box.image3 #image2 {
+            width: 26.667vw;
+            height: auto;
+        }
+
+        .landscape #image_box.image3 #image2 {
+            width: auto;
+            height: 64vh;
+        }
+
+        .portrait #image_box.image3 #image3 {
+            width: 26.667vw;
+            height: auto;
+        }
+
+        .landscape #image_box.image3 #image3 {
+            width: auto;
+            height: 64vh;
+        }
+
         #close_button {
             display: none;
             flex-wrap: nowrap;
@@ -105,14 +275,87 @@
 
 <body>
     <div id="content">
+{{ if .IsNativeAd }}
+        <div id="native_content">
+            <a id="download_url" href="{{ .TargetURL }}">
+                <div id="download_bar">
+                    <img id="icon" src="{{ .IconURL }}" />
+                    <ul id="title_bar">
+                        <li id="title">{{ .Title }}</li>
+                        <li id="subtitle">{{ .Subtitle }}</li>
+                        <li id="star">★ ★ ★ ★ ★</li>
+                    </ul>
+                </div>
+                <div id="image_box">
+                    <img src="{{ .Image1 }}" id="image1" />
+                    <img src="{{ .Image2 }}" id="image2" />
+                    <img src="{{ .Image3 }}" id="image3" />
+                </div>
+            </a>
+        </div>
+        <script type="text/javascript">
+            (function () {
+                var title = "{{ .Title }}".trim();
+                if (title == "") {
+                    document.getElementById('title_bar').style.display = "none";
+                }
+                var subtitle = "{{ .Subtitle }}".trim();
+                if (subtitle == "") {
+                    var description = "{{ .Description }}".trim();
+                    if (description == "") {
+                        document.getElementById('subtitle').style.display = "none";
+                    } else {
+                        document.getElementById('subtitle').innerText = description;
+                        document.getElementById('star').style.display = "none";
+                    }
+                } else {
+                    document.getElementById('star').style.display = "none";
+                }
+                var icon_url = "{{ .IconURL }}".trim();
+                if (icon_url == "") {
+                    document.getElementById('icon').style.display = "none";
+                }
+                var image1_src = '{{ .Image1 }}'.trim();
+                var image2_src = '{{ .Image2 }}'.trim();
+                var image3_src = '{{ .Image3 }}'.trim();
+                var image_box = document.getElementById('image_box');
+                if (image1_src == '') {
+                    image_box.style.display = 'none';
+                } else if (image2_src == '') {
+                    image_box.className = 'image1';
+                } else if (image3_src == '') {
+                    image_box.className = 'image2';
+                } else {
+                    image_box.className = 'image3';
+                }
+
+                function resize() {
+                    var width = document.body.clientWidth;
+                    var height = document.body.clientHeight;
+                    var native_content = document.getElementById('native_content');
+                    if (width < height) {
+                        native_content.className = 'portrait';
+                    } else {
+                        native_content.className = 'landscape';
+                    }
+                }
+
+                setTimeout(resize, 200);
+                window.addEventListener('resize', resize);
+                window.addEventListener('orientationchange', function() {
+                    setTimeout(resize, 200);
+                });
+            })();
+        </script>
+{{ else }}
         <a href="{{ .TargetURL }}">{{ if .VideoURL }}<video autoplay poster="{{ .Image1 }}" x5-playsinline playsinline webkit-playsinline
             src="{{ .VideoURL }}" />{{ else }}<img src="{{ .Image1 }}" />{{end}}</a>
+{{ end }}
         <div id="close_button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
             <path
                 d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm1.41-1.41A8 8 0 1 0 15.66 4.34 8 8 0 0 0 4.34 15.66zm9.9-8.49L11.41 10l2.83 2.83-1.41 1.41L10 11.41l-2.83 2.83-1.41-1.41L8.59 10 5.76 7.17l1.41-1.41L10 8.59l2.83-2.83 1.41 1.41z" />
         </svg></div>
     </div>
-
     <script type="text/javascript">
         (function () {
             var close_button = document.getElementById('close_button');
