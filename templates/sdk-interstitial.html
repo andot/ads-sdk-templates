@@ -69,7 +69,7 @@
             -webkit-justify-content: space-around;
             align-items: center;
             -webkit-align-items: center;
-            background-color: rgba(255, 255, 255, 0.5);
+            background-color: rgba(0, 0, 0, 0.7);
         }
 
         #title {
@@ -85,7 +85,6 @@
             width: auto;
             height: auto;
             padding: 5% 0% 5% 0%;
-            background-color: rgba(0, 0, 0, 0.7);
             color: #ffffff;
             text-shadow: 1px 1px 1px #000000;
             flex-direction: column;
@@ -104,10 +103,12 @@
 
         #native_card.portrait #native_content {
             font-size: 5vw;
+            background-color: transparent;
         }
 
         #native_card.landscape #native_content {
             font-size: 5vh;
+            background-color: rgba(0, 0, 0, 0.7);
         }
 
         #native_card.portrait #subtitle {
@@ -159,17 +160,17 @@
         }
 
         #native_card.portrait #download_button {
-            width: 25vw;
-            height: 10vw;
-            border-radius: 2vw;
-            font-size: 4vw;
+            width: 50vw;
+            height: 16vw;
+            border-radius: 4vw;
+            font-size: 6vw;
         }
 
         #native_card.landscape #download_button {
-            width: 25vh;
-            height: 10vh;
-            border-radius: 2vh;
-            font-size: 4vh;
+            width: 50vh;
+            height: 16vh;
+            border-radius: 4vh;
+            font-size: 6vh;
         }
 
         #native_card.portrait #bg_image_box {
@@ -262,7 +263,7 @@
                 <img id="icon" src="{{ .IconURL }}" />
                 <div id="title_bar">
                     <div id="title">{{ .Title }}</div>
-                    <div id="subtitle">{{ .SubTitle }}</div>
+                    <div id="subtitle">{{ .Subtitle }}</div>
                     <div id="star">★ ★ ★ ★ ★</div>
                 </div>
                 <div id="description">{{ .Description }}</div>
@@ -285,11 +286,11 @@
             var native_card = document.getElementById('native_card');
             var native_content = document.getElementById('native_content');
             var icon = document.getElementById('icon');
-            var images_box = document.getElementById('images_box');
+            var image_box = document.getElementById('image_box');
             var image1 = document.getElementById('image1');
             var image2 = document.getElementById('image2');
             var image3 = document.getElementById('image3');
-            var bg_images_box = document.getElementById('bg_images_box');
+            var bg_image_box = document.getElementById('bg_image_box');
             var bg_image1 = document.getElementById('bg_image1');
             var bg_image2 = document.getElementById('bg_image2');
             var bg_image3 = document.getElementById('bg_image3');
@@ -298,7 +299,7 @@
             if (title == "") {
                 document.getElementById('title_bar').style.display = "none";
             }
-            var subtitle = "{{ .SubTitle }}".trim();
+            var subtitle = "{{ .Subtitle }}".trim();
             if (subtitle == "") {
                 document.getElementById('subtitle').style.display = "none";
             }
@@ -315,11 +316,11 @@
                 image1.style.display = 'none';
                 image2.style.display = 'none';
                 image3.style.display = 'none';
-                images_box.style.display = 'none';
+                image_box.style.display = 'none';
                 bg_image1.style.display = 'none';
                 bg_image2.style.display = 'none';
                 bg_image3.style.display = 'none';
-                bg_images_box.style.display = 'none';
+                bg_image_box.style.display = 'none';
             } else if (image2_src == '') {
                 image1.style.width = '100vw';
                 image2.style.display = 'none';
