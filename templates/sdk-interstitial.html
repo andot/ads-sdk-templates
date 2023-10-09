@@ -40,7 +40,7 @@
             height: 100%;
             font-size: 0;
         }
-        
+
         a {
             text-decoration: none;
             color: #ffffff !important;
@@ -50,7 +50,8 @@
             object-fit: cover;
         } */
 
-        img, video {
+        img,
+        video {
             width: 100%;
             height: 100%;
             padding: 0;
@@ -97,7 +98,8 @@
             z-index: 1;
         }
 
-        #title_bar, #description {
+        #title_bar,
+        #description {
             padding: 0 10% 0 10%;
         }
 
@@ -146,7 +148,7 @@
         #native_card.landscape #description {
             font-size: 4vh;
         }
-        
+
         #download_button {
             display: inline-flex;
             display: -webkit-inline-flex;
@@ -256,7 +258,7 @@
 </head>
 
 <body>
-{{ if .IsNativeAd }}
+    {{ if .IsNativeAd }}
     <div id="native_card">
         <div id="native_content">
             <a id="download_url" href="{{ .TargetURL }}">
@@ -272,7 +274,9 @@
                     <img src="{{ .Image2 }}" id="image2" />
                     <img src="{{ .Image3 }}" id="image3" />
                 </div>
-                <div id="download_button">{{ if .ButtonText }}{{ .ButtonText }}{{ else if .IsDownloadAd }}立即下载{{ else }}立刻打开{{end}}</div>
+                <div id="download_button">{{ if .ButtonText }}{{ .ButtonText }}{{else if eq .Language "en" }}{{ if
+                    .IsDownloadAd }}Download{{ else }}Open{{end}}{{ else }}{{ if .IsDownloadAd }}立即下载{{ else
+                    }}立刻打开{{end}}{{end}}</div>
             </a>
         </div>
         <div id="bg_image_box">
@@ -311,7 +315,7 @@
             var image1_src = '{{ .Image1 }}'.trim();
             var image2_src = '{{ .Image2 }}'.trim();
             var image3_src = '{{ .Image3 }}'.trim();
-            
+
             if (image1_src == '') {
                 image1.style.display = 'none';
                 image2.style.display = 'none';
@@ -356,21 +360,21 @@
 
             setTimeout(resize, 200);
             window.addEventListener('resize', resize);
-            window.addEventListener('orientationchange', function() {
+            window.addEventListener('orientationchange', function () {
                 setTimeout(resize, 200);
             });
         })();
     </script>
-{{ else }}
+    {{ else }}
     <div id="content">
-        <a href="{{ .TargetURL }}">{{ if .VideoURL }}<video autoplay poster="{{ .Image1 }}" x5-playsinline playsinline webkit-playsinline
-        src="{{ .VideoURL }}" />{{ else }}<img src="{{ .Image1 }}" />{{end}}</a>
-    </div>    
-{{ end }}
+        <a href="{{ .TargetURL }}">{{ if .VideoURL }}<video autoplay poster="{{ .Image1 }}" x5-playsinline playsinline
+                webkit-playsinline src="{{ .VideoURL }}" />{{ else }}<img src="{{ .Image1 }}" />{{end}}</a>
+    </div>
+    {{ end }}
     <div id="close_button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-        <path
-            d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm1.41-1.41A8 8 0 1 0 15.66 4.34 8 8 0 0 0 4.34 15.66zm9.9-8.49L11.41 10l2.83 2.83-1.41 1.41L10 11.41l-2.83 2.83-1.41-1.41L8.59 10 5.76 7.17l1.41-1.41L10 8.59l2.83-2.83 1.41 1.41z" />
-    </svg></div>
+            <path
+                d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm1.41-1.41A8 8 0 1 0 15.66 4.34 8 8 0 0 0 4.34 15.66zm9.9-8.49L11.41 10l2.83 2.83-1.41 1.41L10 11.41l-2.83 2.83-1.41-1.41L8.59 10 5.76 7.17l1.41-1.41L10 8.59l2.83-2.83 1.41 1.41z" />
+        </svg></div>
     <script type="text/javascript">
         (function () {
             var close_button = document.getElementById('close_button');
@@ -378,7 +382,7 @@
                 try {
                     adtalos.dispatch('close', '');
                 }
-                catch(e) {
+                catch (e) {
                     window.close();
                 }
             }
@@ -396,24 +400,24 @@
 
             setTimeout(resize, 200);
             window.addEventListener('resize', resize);
-            window.addEventListener('orientationchange', function() {
+            window.addEventListener('orientationchange', function () {
                 setTimeout(resize, 200);
             });
 
             var opacity = 0;
-            setTimeout(function() {
+            setTimeout(function () {
+                close_button.style.opacity = opacity;
+                close_button.style.webkitOpacity = opacity;
+                close_button.style.display = "flex";
+                close_button.style.display = "-webkit-flex";
+                var timer = setInterval(function () {
+                    if (opacity >= 1) {
+                        clearInterval(timer);
+                    }
+                    opacity += 0.1;
                     close_button.style.opacity = opacity;
                     close_button.style.webkitOpacity = opacity;
-                    close_button.style.display = "flex";
-                    close_button.style.display = "-webkit-flex";
-                    var timer = setInterval(function() {
-                        if (opacity >= 1) {
-                            clearInterval(timer);
-                        }
-                        opacity += 0.1;
-                        close_button.style.opacity = opacity;
-                        close_button.style.webkitOpacity = opacity;
-                    }, 100);
+                }, 100);
             }, 1200);
         })();
     </script>

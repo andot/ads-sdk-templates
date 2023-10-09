@@ -3,7 +3,8 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui, viewport-fit=cover"
+    <meta
+        content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui, viewport-fit=cover"
         name="viewport">
     <style>
         *,
@@ -447,7 +448,9 @@
                     <li class="star">★ ★ ★ ★ ★</li>
                 </ul>
                 <div id="space"></div>
-                <div class="download_button">{{ if .ButtonText }}{{ .ButtonText }}{{ else if .IsDownloadAd }}立即下载{{ else }}立刻打开{{end}}</div>
+                <div class="download_button">{{ if .ButtonText }}{{ .ButtonText }}{{else if eq .Language "en" }}{{ if
+                    .IsDownloadAd }}Download{{ else }}Open{{end}}{{ else }}{{ if .IsDownloadAd }}立即下载{{ else
+                    }}立刻打开{{end}}{{end}}</div>
             </div>
         </a>
         <div id="progress">
@@ -465,7 +468,8 @@
                     d="M15 8.59l-2.12-2.13-1.42 1.42L13.6 10l-2.13 2.12 1.42 1.42L15 11.4l2.12 2.13 1.42-1.42L16.4 10l2.13-2.12-1.42-1.42L15 8.6zM4 7H0v6h4l5 5V2L4 7z" />
             </svg>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" id="volume_30" style="display: none">
-                <path d="M9 7H5v6h4l5 5V2L9 7z" /></svg>
+                <path d="M9 7H5v6h4l5 5V2L9 7z" />
+            </svg>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" id="volume_60" style="display: none">
                 <path
                     d="M7 7H3v6h4l5 5V2L7 7zm8.54 6.54l-1.42-1.42a3 3 0 0 0 0-4.24l1.42-1.42a4.98 4.98 0 0 1 0 7.08z" />
@@ -488,13 +492,15 @@
             </div>
             <div id="description">{{ .Description }}</div>
             <a class="download_url" href="{{ .TargetURL }}">
-                <div class="download_button">{{ if .ButtonText }}{{ .ButtonText }}{{ else if .IsDownloadAd }}立即下载{{ else }}立刻打开{{end}}</div>
+                <div class="download_button">{{ if .ButtonText }}{{ .ButtonText }}{{else if eq .Language "en" }}{{ if
+                    .IsDownloadAd }}Download{{ else }}Open{{end}}{{ else }}{{ if .IsDownloadAd }}立即下载{{ else
+                    }}立刻打开{{end}}{{end}}</div>
             </a>
         </div>
         <div id="close_button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                 <path
                     d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm1.41-1.41A8 8 0 1 0 15.66 4.34 8 8 0 0 0 4.34 15.66zm9.9-8.49L11.41 10l2.83 2.83-1.41 1.41L10 11.41l-2.83 2.83-1.41-1.41L8.59 10 5.76 7.17l1.41-1.41L10 8.59l2.83-2.83 1.41 1.41z" />
-        </svg></div>
+            </svg></div>
     </div>
     <script type="text/javascript">
         (function () {
@@ -525,7 +531,7 @@
             if (mutedstatus1 == mutedstatus2) {
                 muted_button.style.display = "none";
             }
-            
+
             function resize() {
                 var width = document.body.clientWidth;
                 var height = document.body.clientHeight;
@@ -548,7 +554,7 @@
 
             setTimeout(resize, 200);
             window.addEventListener('resize', resize);
-            window.addEventListener('orientationchange', function() {
+            window.addEventListener('orientationchange', function () {
                 setTimeout(resize, 200);
             });
 
@@ -616,7 +622,7 @@
                 try {
                     adtalos.dispatch('close', '');
                 }
-                catch(e) {
+                catch (e) {
                     window.close();
                 }
             }
