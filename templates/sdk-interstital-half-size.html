@@ -45,12 +45,13 @@
             font-size: 0;
             position: relative;
         }
-        
+
         a {
             text-decoration: none;
         }
 
-        img, video {
+        img,
+        video {
             width: auto;
             height: auto;
             max-width: 80vw;
@@ -275,7 +276,7 @@
 
 <body>
     <div id="content">
-{{ if .IsNativeAd }}
+        {{ if .IsNativeAd }}
         <div id="native_content">
             <a id="download_url" href="{{ .TargetURL }}">
                 <div id="download_bar">
@@ -342,24 +343,24 @@
 
                 setTimeout(resize, 200);
                 window.addEventListener('resize', resize);
-                window.addEventListener('orientationchange', function() {
+                window.addEventListener('orientationchange', function () {
                     setTimeout(resize, 200);
                 });
             })();
         </script>
-{{ else }}
-        <a href="{{ .TargetURL }}">{{ if .VideoURL }}<video autoplay poster="{{ .Image1 }}" x5-playsinline playsinline webkit-playsinline
-            src="{{ .VideoURL }}" />{{ else }}<img src="{{ .Image1 }}" />{{end}}</a>
-{{ end }}
+        {{ else }}
+        <a href="{{ .TargetURL }}">{{ if .VideoURL }}<video autoplay poster="{{ .Image1 }}" x5-playsinline playsinline
+                webkit-playsinline src="{{ .VideoURL }}" />{{ else }}<img src="{{ .Image1 }}" />{{end}}</a>
+        {{ end }}
         <div id="close_button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-            <path
-                d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm1.41-1.41A8 8 0 1 0 15.66 4.34 8 8 0 0 0 4.34 15.66zm9.9-8.49L11.41 10l2.83 2.83-1.41 1.41L10 11.41l-2.83 2.83-1.41-1.41L8.59 10 5.76 7.17l1.41-1.41L10 8.59l2.83-2.83 1.41 1.41z" />
-        </svg></div>
+                <path
+                    d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm1.41-1.41A8 8 0 1 0 15.66 4.34 8 8 0 0 0 4.34 15.66zm9.9-8.49L11.41 10l2.83 2.83-1.41 1.41L10 11.41l-2.83 2.83-1.41-1.41L8.59 10 5.76 7.17l1.41-1.41L10 8.59l2.83-2.83 1.41 1.41z" />
+            </svg></div>
     </div>
     <script type="text/javascript">
         (function () {
             var close_button = document.getElementById('close_button');
-            
+
             function resize() {
                 var width = document.body.clientWidth;
                 var height = document.body.clientHeight;
@@ -372,7 +373,7 @@
 
             setTimeout(resize, 200);
             window.addEventListener('resize', resize);
-            window.addEventListener('orientationchange', function() {
+            window.addEventListener('orientationchange', function () {
                 setTimeout(resize, 200);
             });
 
@@ -380,26 +381,26 @@
                 try {
                     adtalos.dispatch('close', '');
                 }
-                catch(e) {
+                catch (e) {
                     window.close();
                 }
             }
             close_button.addEventListener('click', close);
 
             var opacity = 0;
-            setTimeout(function() {
+            setTimeout(function () {
+                close_button.style.opacity = opacity;
+                close_button.style.webkitOpacity = opacity;
+                close_button.style.display = "flex";
+                close_button.style.display = "-webkit-flex";
+                var timer = setInterval(function () {
+                    if (opacity >= 1) {
+                        clearInterval(timer);
+                    }
+                    opacity += 0.1;
                     close_button.style.opacity = opacity;
                     close_button.style.webkitOpacity = opacity;
-                    close_button.style.display = "flex";
-                    close_button.style.display = "-webkit-flex";
-                    var timer = setInterval(function() {
-                        if (opacity >= 1) {
-                            clearInterval(timer);
-                        }
-                        opacity += 0.1;
-                        close_button.style.opacity = opacity;
-                        close_button.style.webkitOpacity = opacity;
-                    }, 100);
+                }, 100);
             }, 1000);
         })();
     </script>

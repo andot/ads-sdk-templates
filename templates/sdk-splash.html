@@ -41,12 +41,13 @@
             overflow: hidden;
             font-size: 0;
         }
-        
+
         a {
             text-decoration: none;
         }
 
-        img, video {
+        img,
+        video {
             width: 100%;
             height: 100%;
             padding: 0;
@@ -61,8 +62,8 @@
 
 <body>
     <div id="content">
-        <a href="{{ .TargetURL }}">{{ if .VideoURL }}<video autoplay poster="{{ .Image1 }}" x5-playsinline playsinline webkit-playsinline
-        src="{{ .VideoURL }}" />{{ else }}<img src="{{ .Image1 }}" />{{end}}</a>
+        <a href="{{ .TargetURL }}">{{ if .VideoURL }}<video autoplay poster="{{ .Image1 }}" x5-playsinline playsinline
+                webkit-playsinline src="{{ .VideoURL }}" />{{ else }}<img src="{{ .Image1 }}" />{{end}}</a>
     </div>
 </body>
 

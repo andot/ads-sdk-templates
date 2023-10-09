@@ -1,297 +1,291 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8" />
-    <meta
-      content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui"
-      name="viewport"
-    />
-    <style>
-      *,
-      *:active,
-      *:focus {
-        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-      }
 
-      * {
-        -webkit-touch-callout: none;
-        -webkit-user-select: none;
-        user-select: none;
-      }
+<head>
+  <meta charset="UTF-8" />
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui"
+    name="viewport" />
+  <style>
+    *,
+    *:active,
+    *:focus {
+      -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    }
 
-      html,
-      body {
-        display: flex;
-        display: -webkit-flex;
-        flex-direction: column;
-        -webkit-flex-direction: column;
-        align-content: space-between;
-        -webkit-align-content: space-between;
-        margin: 0;
-        padding: 0;
-        background-color: #ffffff;
-        color: #000000;
-        font-family: "Helvetica Neue", Helvetica, STHeiTi, sans-serif;
-      }
+    * {
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      user-select: none;
+    }
 
-      #content {
-        position: relative;
-      }
+    html,
+    body {
+      display: flex;
+      display: -webkit-flex;
+      flex-direction: column;
+      -webkit-flex-direction: column;
+      align-content: space-between;
+      -webkit-align-content: space-between;
+      margin: 0;
+      padding: 0;
+      background-color: #ffffff;
+      color: #000000;
+      font-family: "Helvetica Neue", Helvetica, STHeiTi, sans-serif;
+    }
 
-      a {
-        text-decoration: none;
-      }
+    #content {
+      position: relative;
+    }
 
-      video {
-        width: 100%;
-        height: auto;
-        padding: 0;
-        margin: 0;
-        background-color: #000000;
-        outline-width: 0px;
-        vertical-align: top;
-      }
+    a {
+      text-decoration: none;
+    }
 
-      video::-internal-media-controls-download-button {
-        display: none;
-      }
+    video {
+      width: 100%;
+      height: auto;
+      padding: 0;
+      margin: 0;
+      background-color: #000000;
+      outline-width: 0px;
+      vertical-align: top;
+    }
 
-      video::-webkit-media-controls-enclosure {
-        overflow: hidden;
-      }
+    video::-internal-media-controls-download-button {
+      display: none;
+    }
 
-      video::-webkit-media-controls-panel {
-        width: calc(100% + 48px);
-      }
+    video::-webkit-media-controls-enclosure {
+      overflow: hidden;
+    }
 
-      #top_bar {
-        display: flex;
-        display: -webkit-flex;
-        flex-wrap: nowrap;
-        -webkit-flex-wrap: nowrap;
-        justify-content: space-between;
-        -webkit-justify-content: space-between;
-        align-items: center;
-        -webkit-align-items: center;
-        width: 96vw;
-        height: auto;
-        padding: 1vw 2vw 1vw 2vw;
-        margin: 0;
-        background-color: #ffffff;
-      }
+    video::-webkit-media-controls-panel {
+      width: calc(100% + 48px);
+    }
 
-      #icon {
-        width: 12vw;
-        height: 12vw;
-        padding: 0;
-        margin-right: 2vw;
-        border: 0;
-        flex-shrink: 0;
-      }
+    #top_bar {
+      display: flex;
+      display: -webkit-flex;
+      flex-wrap: nowrap;
+      -webkit-flex-wrap: nowrap;
+      justify-content: space-between;
+      -webkit-justify-content: space-between;
+      align-items: center;
+      -webkit-align-items: center;
+      width: 96vw;
+      height: auto;
+      padding: 1vw 2vw 1vw 2vw;
+      margin: 0;
+      background-color: #ffffff;
+    }
 
-      #title_bar {
-        display: flex;
-        display: -webkit-flex;
-        flex-direction: column;
-        -webkit-flex-direction: column;
-        justify-content: space-around;
-        -webkit-justify-content: space-around;
-      }
+    #icon {
+      width: 12vw;
+      height: 12vw;
+      padding: 0;
+      margin-right: 2vw;
+      border: 0;
+      flex-shrink: 0;
+    }
 
-      #title {
-        display: flex;
-        display: -webkit-flex;
-        align-items: center;
-        -webkit-align-items: center;
-        font-weight: bold;
-        font-size: 4vw;
-        height: 6vw;
-        color: #000000;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-      }
+    #title_bar {
+      display: flex;
+      display: -webkit-flex;
+      flex-direction: column;
+      -webkit-flex-direction: column;
+      justify-content: space-around;
+      -webkit-justify-content: space-around;
+    }
 
-      #subtitle {
-        display: flex;
-        display: -webkit-flex;
-        align-items: center;
-        -webkit-align-items: center;
-        font-size: 3vw;
-        height: 6vw;
-        color: #333333;
-      }
+    #title {
+      display: flex;
+      display: -webkit-flex;
+      align-items: center;
+      -webkit-align-items: center;
+      font-weight: bold;
+      font-size: 4vw;
+      height: 6vw;
+      color: #000000;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
 
-      #space {
-        flex-grow: 1;
-        -webkit-flex-grow: 1;
-        flex-basis: auto;
-        -webkit-flex-basis: auto;
-      }
+    #subtitle {
+      display: flex;
+      display: -webkit-flex;
+      align-items: center;
+      -webkit-align-items: center;
+      font-size: 3vw;
+      height: 6vw;
+      color: #333333;
+    }
 
-      #description {
-        display: flex;
-        display: -webkit-flex;
-        align-items: center;
-        -webkit-align-items: center;
-        width: 96vw;
-        height: 4vw;
-        font-size: 3vw;
-        padding: 1vw 2vw 1vw 2vw;
-        color: #666666;
-      }
+    #space {
+      flex-grow: 1;
+      -webkit-flex-grow: 1;
+      flex-basis: auto;
+      -webkit-flex-basis: auto;
+    }
 
-      #button {
-        display: flex;
-        display: -webkit-flex;
-        justify-content: center;
-        -webkit-justify-content: center;
-        align-items: center;
-        -webkit-align-items: center;
-        width: 24vw;
-        height: 8vw;
-        margin: 1vw 0 1vw 2vw;
-        background: #3385ff;
-        border-radius: 2vw;
-        color: #ffffff;
-        font-size: 4vw;
-      }
+    #description {
+      display: flex;
+      display: -webkit-flex;
+      align-items: center;
+      -webkit-align-items: center;
+      width: 96vw;
+      height: 4vw;
+      font-size: 3vw;
+      padding: 1vw 2vw 1vw 2vw;
+      color: #666666;
+    }
 
-      #images_box {
-        display: flex;
-        display: -webkit-flex;
-        justify-content: space-around;
-        -webkit-justify-content: space-around;
-        align-items: center;
-        -webkit-align-items: center;
-        width: 100vw;
-        height: auto;
-      }
+    #button {
+      display: flex;
+      display: -webkit-flex;
+      justify-content: center;
+      -webkit-justify-content: center;
+      align-items: center;
+      -webkit-align-items: center;
+      width: 24vw;
+      height: 8vw;
+      margin: 1vw 0 1vw 2vw;
+      background: #3385ff;
+      border-radius: 2vw;
+      color: #ffffff;
+      font-size: 4vw;
+    }
 
-      #video_box {
-        width: 100vw;
-        height: auto;
-      }
-    </style>
-  </head>
+    #images_box {
+      display: flex;
+      display: -webkit-flex;
+      justify-content: space-around;
+      -webkit-justify-content: space-around;
+      align-items: center;
+      -webkit-align-items: center;
+      width: 100vw;
+      height: auto;
+    }
 
-  <body>
-    <div id="content">
-      <a href="{{ .TargetURL }}">
-        <div id="top_bar">
-          <img src="{{ .IconURL }}" id="icon" />
-          <div id="title_bar">
-            <div id="title" title="{{ .Title }}">{{ .Title }}</div>
-            <div id="subtitle" title="{{ .Subtitle }}">{{ .Subtitle }}</div>
-          </div>
-          <div id="space"></div>
-          <div id="button">{{ .ButtonText }}</div>
+    #video_box {
+      width: 100vw;
+      height: auto;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="content">
+    <a href="{{ .TargetURL }}">
+      <div id="top_bar">
+        <img src="{{ .IconURL }}" id="icon" />
+        <div id="title_bar">
+          <div id="title" title="{{ .Title }}">{{ .Title }}</div>
+          <div id="subtitle" title="{{ .Subtitle }}">{{ .Subtitle }}</div>
         </div>
-      </a>
-      <div id="description" title="{{ .Description }}">{{ .Description }}</div>
-      <a href="{{ .TargetURL }}">
-        <div id="images_box">
-          <img src="{{ .Image1 }}" id="image1" />
-          <img src="{{ .Image2 }}" id="image2" />
-          <img src="{{ .Image3 }}" id="image3" />
-        </div>
-      </a>
-      <div id="video_box">
-        <video
-          src="{{ .VideoURL }}"
-          poster="{{ .Image1 }}"
-          controlsList="nodownload"
-          controls
-          webkit-playsinline="true"
-          playsinline="true"
-        ></video>
+        <div id="space"></div>
+        <div id="button">{{ .ButtonText }}</div>
       </div>
+    </a>
+    <div id="description" title="{{ .Description }}">{{ .Description }}</div>
+    <a href="{{ .TargetURL }}">
+      <div id="images_box">
+        <img src="{{ .Image1 }}" id="image1" />
+        <img src="{{ .Image2 }}" id="image2" />
+        <img src="{{ .Image3 }}" id="image3" />
+      </div>
+    </a>
+    <div id="video_box">
+      <video src="{{ .VideoURL }}" poster="{{ .Image1 }}" controlsList="nodownload" controls webkit-playsinline="true"
+        playsinline="true"></video>
     </div>
-    <script type="text/javascript">
-      (function () {
-        var top_bar = document.getElementById("top_bar");
-        var icon = document.getElementById("icon");
-        var title_bar = document.getElementById("title_bar");
-        var title = document.getElementById("title");
-        var subtitle = document.getElementById("subtitle");
-        var button = document.getElementById("button");
-        var description = document.getElementById("description");
-        var images_box = document.getElementById("images_box");
-        var image1 = document.getElementById("image1");
-        var image2 = document.getElementById("image2");
-        var image3 = document.getElementById("image3");
-        var video_box = document.getElementById("video_box");
-        var video = video_box.getElementsByTagName("video")[0];
+  </div>
+  <script type="text/javascript">
+    (function () {
+      var top_bar = document.getElementById("top_bar");
+      var icon = document.getElementById("icon");
+      var title_bar = document.getElementById("title_bar");
+      var title = document.getElementById("title");
+      var subtitle = document.getElementById("subtitle");
+      var button = document.getElementById("button");
+      var description = document.getElementById("description");
+      var images_box = document.getElementById("images_box");
+      var image1 = document.getElementById("image1");
+      var image2 = document.getElementById("image2");
+      var image3 = document.getElementById("image3");
+      var video_box = document.getElementById("video_box");
+      var video = video_box.getElementsByTagName("video")[0];
 
-        if (
-          subtitle.innerHTML.trim() == "" &&
-          description.innerHTML.trim() != ""
-        ) {
-          subtitle.innerHTML = description.innerHTML;
-          description.innerHTML = "";
-        }
+      if (
+        subtitle.innerHTML.trim() == "" &&
+        description.innerHTML.trim() != ""
+      ) {
+        subtitle.innerHTML = description.innerHTML;
+        description.innerHTML = "";
+      }
 
-        var icon_src = "{{ .IconURL }}".trim();
-        var video_src = "{{ .VideoURL }}".trim();
-        var image1_src = "{{ .Image1 }}".trim();
-        var image2_src = "{{ .Image2 }}".trim();
-        var image3_src = "{{ .Image3 }}".trim();
+      var icon_src = "{{ .IconURL }}".trim();
+      var video_src = "{{ .VideoURL }}".trim();
+      var image1_src = "{{ .Image1 }}".trim();
+      var image2_src = "{{ .Image2 }}".trim();
+      var image3_src = "{{ .Image3 }}".trim();
 
-        if (video_src != "") {
-          images_box.style.display = "none";
-        } else {
-          video_box.style.display = "none";
-          video_box.removeChild(video);
-        }
+      if (video_src != "") {
+        images_box.style.display = "none";
+      } else {
+        video_box.style.display = "none";
+        video_box.removeChild(video);
+      }
 
-        if (icon_src == "") {
-          icon.style.display = "none";
-        }
+      if (icon_src == "") {
+        icon.style.display = "none";
+      }
 
-        if (button.innerHTML.trim() == "") {
-          button.style.display = "none";
-        }
+      if (button.innerHTML.trim() == "") {
+        button.style.display = "none";
+      }
 
-        if (title.innerHTML.trim() == "" && subtitle.innerHTML.trim() == "") {
-          title_bar.style.display = "none";
-        } else if (title.innerHTML.trim() == "") {
-          title.style.display = "none";
-        } else if (subtitle.innerHTML.trim() == "") {
-          subtitle.style.display = "none";
-        }
+      if (title.innerHTML.trim() == "" && subtitle.innerHTML.trim() == "") {
+        title_bar.style.display = "none";
+      } else if (title.innerHTML.trim() == "") {
+        title.style.display = "none";
+      } else if (subtitle.innerHTML.trim() == "") {
+        subtitle.style.display = "none";
+      }
 
-        if (
-          icon_src == "" &&
-          title.innerHTML.trim() == "" &&
-          subtitle.innerHTML.trim() == "" &&
-          button.innerHTML.trim() == ""
-        ) {
-          top_bar.style.display = "none";
-        }
+      if (
+        icon_src == "" &&
+        title.innerHTML.trim() == "" &&
+        subtitle.innerHTML.trim() == "" &&
+        button.innerHTML.trim() == ""
+      ) {
+        top_bar.style.display = "none";
+      }
 
-        if (description.innerHTML.trim() == "") {
-          description.style.display = "none";
-        }
+      if (description.innerHTML.trim() == "") {
+        description.style.display = "none";
+      }
 
-        if (image1_src == "") {
-          image1.style.display = "none";
-          image2.style.display = "none";
-          image3.style.display = "none";
-          images_box.style.display = "none";
-        } else if (image2_src == "") {
-          image1.style.width = "100vw";
-          image2.style.display = "none";
-          image3.style.display = "none";
-        } else if (image3_src == "") {
-          image1.style.width = "50vw";
-          image2.style.width = "50vw";
-          image3.style.display = "none";
-        } else {
-          image1.style.width = "33vw";
-          image2.style.width = "33vw";
-          image3.style.width = "33vw";
-        }
-      })();
-    </script>
-  </body>
+      if (image1_src == "") {
+        image1.style.display = "none";
+        image2.style.display = "none";
+        image3.style.display = "none";
+        images_box.style.display = "none";
+      } else if (image2_src == "") {
+        image1.style.width = "100vw";
+        image2.style.display = "none";
+        image3.style.display = "none";
+      } else if (image3_src == "") {
+        image1.style.width = "50vw";
+        image2.style.width = "50vw";
+        image3.style.display = "none";
+      } else {
+        image1.style.width = "33vw";
+        image2.style.width = "33vw";
+        image3.style.width = "33vw";
+      }
+    })();
+  </script>
+</body>
+
 </html>
